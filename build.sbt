@@ -66,7 +66,7 @@ lazy val kamon =
       libraryDependencies ++= Seq(
         "io.kamon"       %% "kamon-core"        % "1.1.6",
         "org.typelevel"  %% "cats-effect"       % "1.2.0",
-        "io.kamon"       %% "kamon-testkit"     % "1.1.6"  % Test,
+        "io.kamon"       %% "kamon-testkit"     % "1.1.1"  % Test,
         "org.scalacheck" %% "scalacheck"        % "1.14.0" % Test,
         "org.scalactic"  %% "scalactic"         % "3.0.5"  % Test,
         "org.scalatest"  %% "scalatest"         % "3.0.5"  % Test
@@ -105,8 +105,8 @@ releaseCrossBuild := true
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
 useGpg := false
-pgpSecretRing := file("local.secring.gpg")
-pgpPublicRing := file("local.pubring.gpg")
+pgpSecretRing := file("local.secring.asc")
+pgpPublicRing := file("local.pubring.asc")
 pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
 
 developers := List(

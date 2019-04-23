@@ -18,4 +18,4 @@ z_local.sbt
 test-output
 .metals
 .bloop
-.local.*
+local.*
