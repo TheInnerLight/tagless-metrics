@@ -1,0 +1,31 @@
+language: scala
+scala:
+  - 2.12.8
+  - 2.11.12
+jdk:
+  - oraclejdk8
+ignore:
+  - version.sbt
+  - README.md
+sudo: false
+cache:
+  directories:
+    - "$HOME/.ivy2"
+    - "$HOME/.coursier"
+    - "$HOME/.sbt"
+env:
+  global:
+    - PUBLISH=true
+    - secure: V1fyNO0UxKey050LHuYES8TfrLecPw9g7G1UOFEh+zqMu7qDJGKaCV24p4Yc9vv9/XkhRMRNP+GDPwt1/vOK1VD0R9RoeMHbboZ5ztbEtaXLzouX1PBvZxTtE8+wuGZLq4EBU3i8f/B/M/WoheFM6cUspsa7QiRegZjE+syT3GNM99an5AWU5H72gBwg374+R0ry5v6SKZnjW98gVrHJVn5R9LMhhMh5HszDgcFORgspurEMgtv/RKgxaYmxwmrE5Wywc8J0ZHc46aYUm75XGrZ7xUZQl+ZHflflOuVeIPFLDan8ZybUxgHSlH7WfNgK3j/7Xuz4Uq7NU/Sgn/b+Qv3eFcdl5XqWY2nWDjxJcF+ZnY6Wdk4s1RqAYhuBq/YCBM54sj4ZQWj3y0yHHYw6G9x/iqxZyHYtSbcfJDjEJwlr2OIkQkPYrV/3c+ZgbvoA8/9aBN88W56fw9SkW5aPts8ozI01v12NqjTvo+I2maikO0/G5E2T0myNqfg0NfkKqciexYvvNxSX9lWcOLAjpxEYYR/6LNHXrC2Q8xhgW0Xvv8/vPCD+Q+ZGGTiwzTXiOXkq4VqfEDWElYd2N7c3d9xV5aYgO/nIu0oXOJOXjFiW3PWNargmMuY5idHLmztPetE+Q1vY3yGAAT9/GrtogFJAPd7VDXRaRt7fFldWjac=
+    - secure: pDQQCshcuLQHw28/DDz62pfh44v5U/TPvr29SacV+NJp4cl91gDxy//rfP5cn8zk8FpEsEqAMkfYIhwPY4dqSyYB2h5r3Eh4e0sei2nxhEVTAUsRdRCT1TrYVfhCz75qcAhJBR2GNC5tQ78oNnriZCmlYQdPqQrqxMLU9MnoadkinikuRO1G+VXFY4BPMwHxl/1tNOm24I/xGpYrHM32ABEBh9sE2t2lqF3hyCTpWhsv3+KAjft/OMvO4X1JQ8sjgMQOZoH5b2VAbzWuCtYoJ0yYH8N7VBw/kbhMLMikaNpJ2pAvFwt9ymXeA9AkE7VZA9/DphySvcF8Squp4TsBAVsq1MU7oz45glXBTjisVlNSs0LuKRmJvIiSjp69fMNylRwykjyslnb7AWVMVC9TMJiPt2h2oahPmhdzpo7sMdvueUnuBsifMIe2M8H4uxvHc6WwhsLJztZ9Fie3nTtuhho0B/obkDmKKvkGxp2voKv5mkK1JhcrAIXOsQaFNaR7fDJlzyMNO9AylSsWzjIdAbYC1n3cUjMJSyoQYjKzuQYag4/RQqeGzDTEJBkXNrWqlprBNV4A7OxYI8p0X1hnr/xIwF6zizeUR1JOjB4e0SWkA2l4iEQx8r+ah9P96XdTBkyja0H585L+srO6+9IqCUJKc/yMdzEjlOBC+5hSOIk=
+    - secure: MkHxiHnylle9vI4FDE6X4hIapJazkBltjc9NbaARtZxIxNhCzrFXoqQoVbDGP4WUfiEWckEd5B7EUN88p1dGjESooDNn36n8VJm8GZee6Ro63wYYQzOxnFNycsmCpsiazrBFwkrpOilW46OYn70FIhsAs10bM9j2aKf2ihyXkarAWTSDUzIthn7ljya8bFnCEwhM3BVIo2f11FEN+vLg4mfJ8u2O8Yhi2+ZT0Pe9+RmxHV7dWM/rSrnBy8nb3gX15d4KPExuPRK+lxhQq7d1xfas4t1UPMdPlffiFI4gVbVaP26nSySRvDbwONtnzWWWJ/h15AAIHydaCtM/38elycYFb30uYMEoc5sVT6HpwiDcoVCvW2czCF19fbnIpmvuosBkUylxbmXoi2tQWnUC0Rsdm6VAySigQhII619WT50wp9AnlND86oNBEOaXoxgD4GJw10fBsdAAMn75fz70J4GyTi3t7Z92400PiqcM52PFb3KpIV6dei9rXFqTPhc5kxX5wSG2H8g+yRIgujb90ZxgsDxxGgBwwh+nMrRSIxSiDShxiOvWZMkRvvEE6+oXHV+FD8P9d5j+zSNeXKCawIrFkO7f+LXUpV93AVKOo4XWo1mGKNlL4I1KsW/+g/oZyabGV/BcTYA+s+ssmzIcOwhQ6nFnWpNhNxPBGp1gIu0=
+before_install:
+  - openssl aes-256-cbc -K $encrypted_5b06f5d5105b_key -iv $encrypted_5b06f5d5105b_iv
+    -in rings.tar.enc -out local.rings.tar -d
+  - tar xvf  local.rings.tar
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION test
+after_success:
+  - git checkout $TRAVIS_BRANCH
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && sbt ++$TRAVIS_SCALA_VERSION
+    'release with-defaults skip-tests'

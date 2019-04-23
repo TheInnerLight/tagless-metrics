@@ -1,0 +1,5 @@
+package org.novelfs.taglessmetrics.kamon.instances.all
+
+import org.novelfs.taglessmetrics.kamon.instances.{DecrementMetricInstances, HistogramMetricInstances, IncrementMetricInstances, TimerMetricInstances}
+
+trait AllInstances extends DecrementMetricInstances with HistogramMetricInstances with IncrementMetricInstances with TimerMetricInstances
