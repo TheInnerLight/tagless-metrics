@@ -105,8 +105,8 @@ releaseCrossBuild := true
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
 useGpg := false
-pgpSecretRing := file("local.secring.asc")
-pgpPublicRing := file("local.pubring.asc")
+pgpSecretRing := file("local.privkey.asc")
+pgpPublicRing := file("local.pubkey.asc")
 pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
 
 developers := List(
