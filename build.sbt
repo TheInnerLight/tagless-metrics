@@ -23,6 +23,9 @@ lazy val commonSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
+  pgpSecretRing := file("local.privkey.asc"),
+  pgpPublicRing := file("local.pubkey.asc"),
+  pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray),
   pomIncludeRepository := { _ => false },
   publishMavenStyle := true,
   scalacOptions ++= Seq(
@@ -118,9 +121,7 @@ releaseCrossBuild := true
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
 useGpg := true
-pgpSecretRing := file("local.privkey.asc")
-pgpPublicRing := file("local.pubkey.asc")
-pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
+
 
 developers := List(
   Developer(
