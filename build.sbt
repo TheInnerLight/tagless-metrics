@@ -6,10 +6,25 @@ version := "0.1"
 
 val ScalaVersion = "2.12.8"
 
+lazy val noPublishSettings = Seq(
+  publish := {},
+  publishLocal := {},
+  publishArtifact := false
+)
+
 lazy val commonSettings = Seq(
   scalaVersion := ScalaVersion,
   organization := "org.novelfs",
   addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.0"),
+  publishTo := {
+    val nexus = "https://oss.sonatype.org/"
+    if (isSnapshot.value)
+      Some("snapshots" at nexus + "content/repositories/snapshots")
+    else
+      Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  },
+  pomIncludeRepository := { _ => false },
+  publishMavenStyle := true,
   scalacOptions ++= Seq(
     "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
     "-encoding", "utf-8",                // Specify character encoding used by source files.
@@ -77,6 +92,7 @@ lazy val kamon =
 lazy val combined =
   (project in file("."))
     .settings(commonSettings: _*)
+    .settings(noPublishSettings)
     .aggregate(
       core, 
       kamon
@@ -86,9 +102,6 @@ credentials ++= (for {
   username <- sys.env.get("SONATYPE_USERNAME")
   password <- sys.env.get("SONATYPE_PASSWORD")
 } yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
-
-pomIncludeRepository := { _ => false }
-publishMavenStyle := true
 
 licenses := Seq("Apache-2.0" -> url("https://opensource.org/licenses/Apache-2.0"))
 
@@ -118,13 +131,7 @@ developers := List(
   )
 )
 
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+
 
 parallelExecution in Test := false
 
