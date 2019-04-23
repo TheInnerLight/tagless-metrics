@@ -104,7 +104,7 @@ scmInfo := Some(
 releaseCrossBuild := true
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
-useGpg := false
+useGpg := true
 pgpSecretRing := file("local.privkey.asc")
 pgpPublicRing := file("local.pubkey.asc")
 pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
