@@ -23,8 +23,8 @@ lazy val commonSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
-//  pgpSecretRing := (ThisBuild / baseDirectory).value / "local.privkey.asc",
-//  pgpPublicRing := (ThisBuild / baseDirectory).value / "local.pubkey.asc",
+  pgpSecretRing := (ThisBuild / baseDirectory).value / "local.privkey.asc",
+  pgpPublicRing := (ThisBuild / baseDirectory).value / "local.pubkey.asc",
   pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray),
   pomIncludeRepository := { _ => false },
   publishMavenStyle := true,
@@ -120,7 +120,7 @@ scmInfo := Some(
 releaseCrossBuild := true
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
-useGpg := true
+useGpg := false
 
 developers := List(
   Developer(
