@@ -23,6 +23,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_577c46c2a89f_key -iv $encrypted_577c46c2a89f_iv
   -in rings.tar.enc -out local.rings.tar -d
 - tar xvf  local.rings.tar
+before_script: gpg --import local.privkey.asc
 script:
 - sbt ++$TRAVIS_SCALA_VERSION test
 after_success:
