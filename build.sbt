@@ -23,9 +23,6 @@ lazy val commonSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
-  pgpSecretRing := (ThisBuild / baseDirectory).value / "local.privkey.asc",
-  pgpPublicRing := (ThisBuild / baseDirectory).value / "local.pubkey.asc",
-  pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray),
   pomIncludeRepository := { _ => false },
   publishMavenStyle := true,
   scalacOptions ++= Seq(
@@ -130,8 +127,6 @@ developers := List(
     url   = url("https://github.com/TheInnerLight")
   )
 )
-
-
 
 parallelExecution in Test := false
 
