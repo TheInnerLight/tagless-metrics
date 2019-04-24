@@ -2,7 +2,7 @@ import ReleaseTransformations._
 
 name := "tagless-metrics"
 
-version := "0.1.1"
+version := "0.1.2"
 
 val ScalaVersion = "2.12.8"
 
@@ -23,6 +23,22 @@ lazy val commonSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
+  homepage := Some(url("https://github.com/TheInnerLight/tagless-metrics")),
+  licenses := Seq("Apache-2.0" -> url("https://opensource.org/licenses/Apache-2.0")),
+  scmInfo := Some(
+    ScmInfo(
+      url("https://github.com/TheInnerLight/tagless-metrics"),
+      "scm:git@github.com:TheInnerLight/tagless-metrics.git"
+    )
+  ),
+  developers := List(
+    Developer(
+      id    = "TheInnerLight",
+      name  = "Phil Curzon",
+      email = "phil@novelfs.org",
+      url   = url("https://github.com/TheInnerLight")
+    )
+  ),
   pomIncludeRepository := { _ => false },
   publishMavenStyle := true,
   scalacOptions ++= Seq(
@@ -102,26 +118,6 @@ credentials ++= (for {
   username <- sys.env.get("SONATYPE_USERNAME")
   password <- sys.env.get("SONATYPE_PASSWORD")
 } yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
-
-licenses := Seq("Apache-2.0" -> url("https://opensource.org/licenses/Apache-2.0"))
-
-homepage := Some(url("https://github.com/TheInnerLight/tagless-metrics"))
-
-scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/TheInnerLight/tagless-metrics"),
-    "scm:git@github.com:TheInnerLight/tagless-metrics.git"
-  )
-)
-
-developers := List(
-  Developer(
-    id    = "TheInnerLight",
-    name  = "Phil Curzon",
-    email = "phil@novelfs.org",
-    url   = url("https://github.com/TheInnerLight")
-  )
-)
 
 parallelExecution in Test := false
 
