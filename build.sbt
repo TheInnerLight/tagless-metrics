@@ -135,7 +135,7 @@ releaseProcess := Seq[ReleaseStep](
   runTest,
   setReleaseVersion,
   tagRelease,
-  releaseStepCommand("publishSigned"),
+  releaseStepCommand("publish"),
   releaseStepCommand("sonatypeRelease")
 )
 
