@@ -2,7 +2,7 @@ import ReleaseTransformations._
 
 name := "tagless-metrics"
 
-version := "0.1"
+version := "0.1.1"
 
 val ScalaVersion = "2.12.8"
 
@@ -113,9 +113,6 @@ scmInfo := Some(
     "scm:git@github.com:TheInnerLight/tagless-metrics.git"
   )
 )
-
-releaseCrossBuild := true
-crossScalaVersions := Seq("2.11.12", "2.12.6")
 
 developers := List(
   Developer(
