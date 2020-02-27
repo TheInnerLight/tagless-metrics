@@ -40,9 +40,9 @@ val helloWorldCounter = Counter("hello-world-counter")
 
 def printAndIncrementMetric[F[_] : Sync : IncrementMeric[?[_], Counter]] : F[Unit] =
   for {
-    _ <- IncrementMetric[F, Counter].increment(helloWorldCounter.withTag("status" -> "before"))
+    _ <- IncrementMetric[F, Counter].increment(helloWorldCounter.withTag("status", "before"))
     _ <- Sync[F].delay { println("Hello world" }
-    _ <- IncrementMetric[F, Counter].increment(helloWorldCounter.withTag("status" -> "after"))
+    _ <- IncrementMetric[F, Counter].increment(helloWorldCounter.withTag("status", "after"))
   } yield ()
 
 ```
