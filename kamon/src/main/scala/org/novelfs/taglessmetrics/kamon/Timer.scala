@@ -1,12 +1,20 @@
 package org.novelfs.taglessmetrics.kamon
 
-final case class Timer(name : String, tags : Map[String, String])
+import kamon.tag.TagSet
+
+final case class Timer(name : String, tags : TagSet)
 
 object Timer {
-  def apply(name: String): Timer = new Timer(name, Map.empty)
+  def apply(name: String): Timer = new Timer(name, TagSet.Empty)
 
   implicit class TimerOps(val timer: Timer) extends AnyVal {
-    def refine(tag : (String, String)) : Timer =
-      timer.copy(tags = timer.tags + tag)
+    def withTag(key: String, value: String) : Timer =
+      timer.copy(tags = timer.tags.withTag(key, value))
+
+    def withTag(key: String, value: Boolean) : Timer =
+      timer.copy(tags = timer.tags.withTag(key, value))
+
+    def withTag(key: String, value: Long) : Timer =
+      timer.copy(tags = timer.tags.withTag(key, value))
   }
 }
