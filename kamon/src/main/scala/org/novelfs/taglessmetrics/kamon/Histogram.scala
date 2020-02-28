@@ -1,12 +1,20 @@
 package org.novelfs.taglessmetrics.kamon
 
-final case class Histogram(name : String, tags : Map[String, String])
+import kamon.tag.TagSet
+
+final case class Histogram(name : String, tags : TagSet)
 
 object Histogram {
-  def apply(name: String): Histogram = new Histogram(name, Map.empty)
+  def apply(name: String): Histogram = new Histogram(name, TagSet.Empty)
 
   implicit class THistogramOps(val hist: Histogram) extends AnyVal {
-    def refine(tag : (String, String)) : Histogram =
-      hist.copy(tags = hist.tags + tag)
+    def withTag(key: String, value: String) : Histogram =
+      hist.copy(tags = hist.tags.withTag(key, value))
+
+    def withTag(key: String, value: Boolean) : Histogram =
+      hist.copy(tags = hist.tags.withTag(key, value))
+
+    def withTag(key: String, value: Long) : Histogram =
+      hist.copy(tags = hist.tags.withTag(key, value))
   }
 }

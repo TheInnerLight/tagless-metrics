@@ -10,7 +10,7 @@ trait TimerMetricInstances {
   implicit def timerTimer[F[_] : Sync] : TimerMetric[F, Timer]= new TimerMetric[F, Timer] {
     override def measure[A](op: F[A])(metric: Timer): F[A] =
       for {
-        started <- Sync[F].delay{ Kamon.timer(metric.name).refine(metric.tags).start() }
+        started <- Sync[F].delay{ Kamon.timer(metric.name).withTags(metric.tags).start() }
         result <- op
         _ <- Sync[F].delay { started.stop() }
       } yield result
