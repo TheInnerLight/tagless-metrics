@@ -4,7 +4,11 @@ name := "tagless-metrics"
 
 version := "0.2.0"
 
-val ScalaVersion = "2.13.1"
+inThisBuild(Seq(
+  organization := "org.novelfs",
+  scalaVersion := "2.13.1",
+  crossScalaVersions := Seq("2.12.10", scalaVersion.value)
+))
 
 lazy val noPublishSettings = Seq(
   publish := {},
@@ -13,8 +17,6 @@ lazy val noPublishSettings = Seq(
 )
 
 lazy val commonSettings = Seq(
-  scalaVersion := ScalaVersion,
-  organization := "org.novelfs",
   addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),
   publishTo := {
     val nexus = "https://oss.sonatype.org/"
