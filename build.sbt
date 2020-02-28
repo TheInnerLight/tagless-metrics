@@ -25,6 +25,7 @@ lazy val commonSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
+  sonatypeSessionName := s"[sbt-sonatype] ${name.value}-${scalaBinaryVersion.value}-${version.value}",
   homepage := Some(url("https://github.com/TheInnerLight/tagless-metrics")),
   licenses := Seq("Apache-2.0" -> url("https://opensource.org/licenses/Apache-2.0")),
   scmInfo := Some(
@@ -92,5 +93,5 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   tagRelease,
   publishArtifacts,
-  releaseStepCommand("sonatypeRelease")
+  releaseStepCommand("sonatypeBundleRelease")
 )
