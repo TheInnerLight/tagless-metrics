@@ -3,7 +3,7 @@ scala:
 - 2.13.1
 - 2.12.10
 jdk:
-- oraclejdk8
+- openjdk8
 ignore:
 - version.sbt
 - README.md
