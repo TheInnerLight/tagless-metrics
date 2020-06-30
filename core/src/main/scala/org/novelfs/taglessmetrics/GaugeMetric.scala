@@ -3,7 +3,7 @@ package org.novelfs.taglessmetrics
 trait GaugeMetric[F[_], TMetric] {
   def raise(n : Double)(metric: TMetric) : F[Unit]
   def lower(n : Double)(metric: TMetric) : F[Unit]
-  def update(n: Double)(metric: TMetric) : F[Unit]
+  def set(n: Double)(metric: TMetric) : F[Unit]
 }
 
 object GaugeMetric {
