@@ -80,8 +80,20 @@ class GaugeSpec extends FlatSpec with Matchers with InstrumentInspection.Syntax 
       val kamonGauge = Kamon.gauge("test-gauge-4").withoutTags
       kamonGauge.update(Double.MaxValue)
       val testGauge = Gauge("test-gauge-4")
-      DecrementMetric[IO, Gauge].decrementTimes(n.toLong)(testGauge).unsafeRunSync()
+      GaugeMetric[IO, Gauge].lower(n)(testGauge).unsafeRunSync()
       val expectedGaugeValue = Double.MaxValue - n
+      val actualGaugeValue = kamonGauge.value()
+      actualGaugeValue shouldBe expectedGaugeValue
+    }
+  }
+
+  "update" should "set the metric to n" in {
+    forAll(positiveDouble) { n: Double =>
+      val kamonGauge = Kamon.gauge("test-gauge-4").withoutTags
+      kamonGauge.update(Double.MaxValue)
+      val testGauge = Gauge("test-gauge-4")
+      GaugeMetric[IO, Gauge].update(n)(testGauge).unsafeRunSync()
+      val expectedGaugeValue = n
       val actualGaugeValue = kamonGauge.value()
       actualGaugeValue shouldBe expectedGaugeValue
     }

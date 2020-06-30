@@ -17,5 +17,10 @@ trait GaugeMetricInstances {
       Sync[F].delay {
         Kamon.gauge(metric.name).withTags(metric.tags).decrement(n)
       }.void
+
+    override def update(n: Double)(metric: Gauge): F[Unit] =
+      Sync[F].delay {
+        Kamon.gauge(metric.name).withTags(metric.tags).update(n)
+      }.void
   }
 }
