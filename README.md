@@ -22,8 +22,8 @@ Defines kamon-integration via the dsl.
 Add dependencies to `built.sbt`
 
 ```
-libraryDependencies += "org.novelfs" %% "tagless-metrics-core" % "0.2.0"
-libraryDependencies += "org.novelfs" %% "tagless-metrics-kamon" % "0.2.0"
+libraryDependencies += "org.novelfs" %% "tagless-metrics-core" % "0.2.1"
+libraryDependencies += "org.novelfs" %% "tagless-metrics-kamon" % "0.2.1"
 ```
 
 ## Usage
