@@ -19,3 +19,5 @@ test-output
 .metals
 .bloop
 local.*
+.vscode
+metals.sbt

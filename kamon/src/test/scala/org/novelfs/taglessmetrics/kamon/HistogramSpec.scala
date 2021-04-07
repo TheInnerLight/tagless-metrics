@@ -1,13 +1,15 @@
 package org.novelfs.taglessmetrics.kamon
 
 import kamon.testkit.InstrumentInspection
-import org.scalatest.{FlatSpec, Matchers}
 import org.novelfs.taglessmetrics.kamon.instances.all._
 import _root_.kamon.Kamon
 import cats.effect.IO
 import org.novelfs.taglessmetrics.HistogramMetric
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+import cats.effect.unsafe.implicits.global
 
-class HistogramSpec extends FlatSpec with Matchers with InstrumentInspection.Syntax {
+class HistogramSpec extends AnyFlatSpec with Matchers with InstrumentInspection.Syntax {
   "histogram" should "record values" in {
     val hist = Histogram("test-histogram")
     val test =
@@ -19,7 +21,7 @@ class HistogramSpec extends FlatSpec with Matchers with InstrumentInspection.Syn
 
     test.unsafeRunSync()
 
-    val kamonHist = Kamon.histogram("test-histogram").withoutTags
+    val kamonHist = Kamon.histogram("test-histogram").withoutTags()
 
     val distribution = kamonHist.distribution()
     distribution.min shouldBe 100

@@ -2,11 +2,11 @@ import ReleaseTransformations._
 
 name := "tagless-metrics"
 
-version := "0.2.1"
+version := "0.3.0"
 
 inThisBuild(Seq(
   organization := "org.novelfs",
-  scalaVersion := "2.13.1",
+  scalaVersion := "2.13.5",
   crossScalaVersions := Seq("2.12.10", scalaVersion.value)
 ))
 
@@ -17,7 +17,7 @@ lazy val noPublishSettings = Seq(
 )
 
 lazy val commonSettings = Seq(
-  addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),
+  addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full),
   publishTo := sonatypePublishToBundle.value,
   sonatypeSessionName := s"[sbt-sonatype] ${name.value}-${scalaBinaryVersion.value}-${version.value}",
   homepage := Some(url("https://github.com/TheInnerLight/tagless-metrics")),
@@ -53,12 +53,12 @@ lazy val kamon =
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "io.kamon"       %% "kamon-bundle"      % "2.0.4",
-        "org.typelevel"  %% "cats-effect"       % "2.1.0",
-        "io.kamon"       %% "kamon-testkit"     % "2.0.4"  % Test,
-        "org.scalacheck" %% "scalacheck"        % "1.14.3" % Test,
-        "org.scalactic"  %% "scalactic"         % "3.0.8"  % Test,
-        "org.scalatest"  %% "scalatest"         % "3.0.8"  % Test,
+        "io.kamon"          %% "kamon-bundle"                  % "2.0.4",
+        "org.typelevel"     %% "cats-effect"                   % "3.0.0",
+        "io.kamon"          %% "kamon-testkit"                 % "2.0.4"   % Test,
+        "org.scalacheck"    %% "scalacheck"                    % "1.15.3"  % Test,
+        "org.scalatestplus" %% "scalacheck-1-15"               % "3.2.5.0" % Test,
+        "org.scalatest"     %% "scalatest"                     % "3.2.5"   % Test,
       ),
       name := "tagless-metrics-kamon",
     )
