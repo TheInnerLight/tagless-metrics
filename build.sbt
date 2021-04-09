@@ -7,7 +7,7 @@ version := "0.3.0"
 inThisBuild(Seq(
   organization := "org.novelfs",
   scalaVersion := "2.13.5",
-  crossScalaVersions := Seq("2.12.10", scalaVersion.value)
+  crossScalaVersions := Seq("2.12.13", scalaVersion.value)
 ))
 
 lazy val noPublishSettings = Seq(
