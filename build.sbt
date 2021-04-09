@@ -7,7 +7,7 @@ version := "0.3.0"
 inThisBuild(Seq(
   organization := "org.novelfs",
   scalaVersion := "2.13.5",
-  crossScalaVersions := Seq("2.12.10", scalaVersion.value)
+  crossScalaVersions := Seq("2.12.13", scalaVersion.value)
 ))
 
 lazy val noPublishSettings = Seq(
@@ -54,7 +54,7 @@ lazy val kamon =
     .settings(
       libraryDependencies ++= Seq(
         "io.kamon"          %% "kamon-bundle"                  % "2.0.4",
-        "org.typelevel"     %% "cats-effect"                   % "3.0.0",
+        "org.typelevel"     %% "cats-effect"                   % "3.0.1",
         "io.kamon"          %% "kamon-testkit"                 % "2.0.4"   % Test,
         "org.scalacheck"    %% "scalacheck"                    % "1.15.3"  % Test,
         "org.scalatestplus" %% "scalacheck-1-15"               % "3.2.5.0" % Test,
